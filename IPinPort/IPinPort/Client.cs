@@ -1,7 +1,9 @@
-﻿using System;
+﻿using MinimalisticTelnet;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace IPinPort
@@ -74,6 +76,29 @@ namespace IPinPort
             {
                 Switch = value;
             }
+        }
+
+        public string addACL()
+        {
+            TelnetConnection tc = new TelnetConnection(Switch, 23);
+            string s = tc.Login("roman", "hme55cumo", 500);
+            Console.Write(s);
+            string prompt = s.TrimEnd();
+            prompt = s.Substring(prompt.Length - 1, 1);
+            if (prompt != "#" && prompt != ">")
+                throw new Exception("Connection failed");
+
+            prompt = "";
+            Console.Write(tc.Read());
+            tc.WriteLine("save all");
+            Console.Write(tc.Read());
+            Thread.Sleep(10000);
+            Console.Write(tc.Read());
+            tc.WriteLine("logout");
+            Console.Write(tc.Read());
+            Console.ReadLine();
+            return "complite";
+
         }
     }
 }

@@ -1,0 +1,8 @@
+create access_profile profile_id 3 profile_name allow_ip ip source_ip_mask 255.255.255.255
+config access_profile profile_id 3 add access_id 9 ip source_ip 10.128.16.113 port 9 permit
+
+config access_profile profile_id 3 add access_id 2 ip source_ip 10.128.15.254 port 2 permit
+
+config access_profile profile_id 3 add access_id 109 ip source_ip 0.0.0.0 mask 0.0.0.0 port 9 deny
+
+config access_profile profile_id 3 add access_id 102 ip source_ip 0.0.0.0 mask 0.0.0.0 port 2 deny
